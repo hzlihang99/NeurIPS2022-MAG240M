@@ -9,7 +9,7 @@ dgl==0.9.0
 torch==1.12.1
 ```
 ## Step 1: Download Auxiliary Data
-Since our algorihtm use the KDD2021 winning teams' R-GAT as our base model, here we reused their pre-trained meta2path representation. Corresponding files can be downloaded: [here (password: 0mr0)](https://pan.baidu.com/s/1_0PhbFglsWmYdo9fO1CRGQ)
+We used meta2path representation from KDDCUP 2021 winning method R-UNIMP. Corresponding files can be downloaded: [here (password: 0mr0)](https://pan.baidu.com/s/1_0PhbFglsWmYdo9fO1CRGQ)
 
 ## Step 2: Preprocess Features
 
@@ -38,7 +38,7 @@ Then, you will save the new cross validation data in follow dir:
 * `./valid_split`
 
 ## Step 4: Train the backbone R-GAT Model
-
+Here we reimplemented R-Unimp with PyTorch as our R-GAT backbone model.
 ```
 # Fold k training:
 python train_rgat.py --data_root ./ --cv_root valid_split/ --cv_name valid_k.npy --model-path ./rgat_k.pt
@@ -59,17 +59,17 @@ This will give you the following files:
 * `full_diffusion.npy`: The diffused node features.
 * `year_diffusion.npy`: The diffused year features.
 
-## Step 7: MLP Training
+## Step 7: Inverse APPNP Training
 ```
-# Fold k MLP Training (k from 0 to 4):
+# Fold k inverse APPNP Training (k from 0 to 4):
 python train_mlp.py --fold k
 ```
 
-## Step 8: MLP Inference
+## Step 8: Inverse APPNP Inference
 ```
-# Fold k MLP Inference (k from 0 to 4):
+# Fold k inverse APPNP Inference (k from 0 to 4):
 python infer_mlp.py --fold k
 ```
 
-## Step 9: Ensemble All Fold Results
-In our final submission, we take the average of five folds' results. Besides, to fully exploit the precious experiences of last year's winning team, we also train the R-Unimp model and ensemble it with our MLP's outputs.
+## Step 9: Ensemble all Fold Results
+In our final submission, we take the average of the results from both MLPs and the R-GAT backbone models, each including 5 folds.
