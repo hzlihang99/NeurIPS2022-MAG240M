@@ -59,17 +59,17 @@ This will give you the following files:
 * `full_diffusion.npy`: The diffused node features.
 * `year_diffusion.npy`: The diffused year features.
 
-## Step 7: Propogate MLP Training
+## Step 7: MLP Training
 ```
-# Fold k MLP Inference(k from 0 to 4):
+# Fold k MLP Training (k from 0 to 4):
 python train_mlp.py --fold k
 ```
 
-## Step 8: Propogate MLP Training
+## Step 8: MLP Inference
 ```
-# Fold k MLP Inference(k from 0 to 4):
+# Fold k MLP Inference (k from 0 to 4):
 python infer_mlp.py --fold k
 ```
 
 ## Step 9: Ensemble All Fold Results
-In our submission, we will take the average of five folds' results. Besides, to fully exploit the precious experiences of last year's winning teams, we also train the R-Unimp Model and 
+In our final submission, we take the average of five folds' results. Besides, to fully exploit the precious experiences of last year's winning team, we also train the R-Unimp model and ensemble it with our MLP's outputs.
